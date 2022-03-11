@@ -1,5 +1,8 @@
 // Assignment code here
-
+var symbols = "!#$%&";
+  var num = "1234567890";
+  var upper ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var lower = "abcdefghijklmnopqrstuvwxyz";
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -11,8 +14,7 @@ function writePassword() {
   if((numLength < 8)||(numLength > 128)){
     numLength = prompt("Enter a num between 8-128");
   }
-  // start of string to be used in password generation. Upper case means yes, lower means no
-  var str1 = "";
+  // start by building a string to be used in password generation. Upper case means yes, lower means no
 
   //ask for user if they want to use lower case in password, will concatenate a upper or lower case letter to string charType
   var input1 = confirm("Do you want to use lower case letters in password?");
@@ -20,7 +22,7 @@ function writePassword() {
     var str1 = "l";
   }
   else{
-    var str2 = "L";
+    var str1 = "L";
   }
 
   //ask user if they want upper case in password, concats a lower u or upper U depending on response
@@ -57,16 +59,57 @@ function writePassword() {
     window.alert("null paswords not allowed");
     writePassword();
   }
+//call to genereate password with peramiters 
+  var password = generatePassword.call(password, numLength, charType);
 
-  var password = generatePassword(numLength, charType);
+
   var passwordText = document.querySelector("#password");
-
+  console.log(password);
   passwordText.value = password;
 
 }
 
-function generatePassword(numLength, charType){
 
+function generatePassword(numLength, charType){
+  let holding = "";//the generated password
+  
+  while(holding.length < numLength){
+    var char = Math.floor(Math.random() * 5);
+    if(char == 4){
+      if (charType.charAt(3) === "s"){
+        char--;
+      }
+      else{
+        holding = holding.concat(symbols.charAt(Math.floor(Math.random()* 5)));
+      }
+    }
+    else if(char == 3){
+      if(charType.charAt(2) === "n"){
+        char--;
+      }
+      else{
+        holding = holding.concat(num.charAt(Math.floor(Math.random()*10)));
+      }
+    }
+    else if(char == 2){
+      if(charType.charAt(1) === "u"){
+        char--;
+      }
+      else{
+        holding = holding.concat(upper.charAt(Math.floor(Math.random()*26)));
+      }
+    }
+    else if (char == 1){
+      if(charType.charAt(0) === "l"){
+        char--;
+      }
+      else{
+        holding = holding.concat(lower.charAt(Math.floor(Math.random()*26)));
+      }
+    }
+  }
+
+  return holding;
 }
 
 // Add event listener to generate button
