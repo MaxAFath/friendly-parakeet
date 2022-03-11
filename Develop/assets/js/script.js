@@ -7,65 +7,50 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
   //ask user for pasword length
-  var temp = " ";
   var numLength = prompt("How long do you want the password to be? Please eneter a num between 8 - 128");
   if((numLength < 8)||(numLength > 128)){
     numLength = prompt("Enter a num between 8-128");
   }
-  //string to be used in password generation. Upper case means yes, lower means no
-  var charType = "";
+  // start of string to be used in password generation. Upper case means yes, lower means no
+  var str1 = "";
 
-  //lines 19- ask for user input of y or n, will concatenate a upper or lower case letter to string charType
-  temp = prompt("Do you want lower case used in password? Enter Y or N");
-  while((temp != "y")||(temp != "Y") || (temp != "N") || (temp != "n")){
-    temp = prompt("Please enter a y or n");
-  }
-  if((temp === "N")|| (temp === "n")){
-    charType = charType.concat("l");
+  //ask for user if they want to use lower case in password, will concatenate a upper or lower case letter to string charType
+  var input1 = confirm("Do you want to use lower case letters in password?");
+  if(input1 === false){
+    var str1 = "l";
   }
   else{
-    charType = charType.concat("L");
+    var str2 = "L";
   }
-  temp =" ";//clears temp of value
 
-  //see line 18 for explination of code block
-  temp = prompt("Do you want Upper case to be used in password? Enter Y or N");
-  while((temp != "y")||(temp != "Y") || (temp != "N") || (temp != "n")){
-    temp = prompt("Please enter a y or n");
-  }
-  if ((temp === "N") || (temp === "n")){
-    charType = charType.concat("u");
+  //ask user if they want upper case in password, concats a lower u or upper U depending on response
+  var input2 = confirm("Do you want to use uper case letters in this password");
+  if(input2 === false){
+    var str2 = str1.concat("u");
   }
   else{
-    charType = charType.concat("U");
+    var str2 = str1.concat("U");
   }
-  temp = " ";//clears temp of value
 
-  //see line 18 for explination of code block
-  temp = prompt("Do you want numbers in this passwrod? Enter Y or N");
-  while((temp != "y")||(temp != "Y") || (temp != "N") || (temp != "n")){
-    temp = prompt("Please enter a y or n");
-  }
-  if((temp === "N") || (temp === "n")){
-    charType = charType.concat("n");
+  //ask user if they want numbers in password, concat lower n or upper N to string being build
+  var input3 = confirm("Do you want numbers in this password?");
+  if(input3 === false){
+    var str3 = str2.concat("n");
   }
   else{
-    charType = charType.concat("N");
+    var str3 = str2.concat("N");
   }
-  temp = " ";//clears temp of value
 
-  //see line 18 for explination of code block
-  temp = prompt("Do you want special characters to be used in this password? Enter Y or N");
-  while((temp != "y")||(temp != "Y") || (temp != "N") || (temp != "n")){
-    temp = prompt("Please enter a y or n");
-  }
-  if((temp === "N")|| (temp === "n")){
-    charType = charType.concat("s");
+  //ask user if they want special characters in password, concat lower s or upper S to string being build
+  var input4 = confirm("Do you want special characters in this password");
+  if(input4 === false){
+    var charType = str3.concat("s");
   }
   else{
-    charType = charType.concat("S");
+    var charType = str3.concat("S");
   }
-  temp = " ";//clear temp of value
+
+  console.log(charType);
 
   //check string for if no was answer to all questions
   if(charType === "luns"){
