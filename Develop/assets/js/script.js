@@ -63,9 +63,9 @@ function writePassword() {
   var password = generatePassword.call(password, numLength, charType);
 
 
-  //var passwordText = document.querySelector("#password");
+  var passwordText = document.querySelector("#password");
   console.log(password);
-  //passwordText.value = password;
+  passwordText.value = password;
 
 }
 
@@ -109,7 +109,7 @@ function generatePassword(numLength, charType){
     }
   }
   if(testPassword(holding, charType)){
-    let holding = generatePassword.call(holding, numLength, charType);
+     holding = generatePassword.call(holding, numLength, charType);
   }
 
   return holding;
