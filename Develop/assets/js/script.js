@@ -63,9 +63,9 @@ function writePassword() {
   var password = generatePassword.call(password, numLength, charType);
 
 
-  var passwordText = document.querySelector("#password");
+  //var passwordText = document.querySelector("#password");
   console.log(password);
-  passwordText.value = password;
+  //passwordText.value = password;
 
 }
 
@@ -108,8 +108,54 @@ function generatePassword(numLength, charType){
       }
     }
   }
+  if(testPassword(holding, charType)){
+    let holding = generatePassword.call(holding, numLength, charType);
+  }
 
   return holding;
+}
+
+function testPassword(holding, charType){//test password return false if password build includes all asked for variables
+  var bool1 = false;
+  var bool2 = false;
+  var bool3 = false;
+  var bool4 = false;
+  //loops through the string holding, to see if the asked for characters in password are present. 
+  for(var i = 0; i < holding.length; i++){
+    if((charType.charAt(0) == "L")){
+      for(var l = 0; l < lower.length; l++){
+        if(holding.charAt(i) == lower.charAt(l)){
+          bool1 = true;
+        }
+      }
+    }
+    else if(charType.charAt(1) == "U"){
+      for(var u = 0; u < upper.length; u++){
+        if(holding.charAt(i) == upper.charAt(u)){
+          bool2 = true;
+        }
+      }
+    }
+    else if((charType.charAt(2) == "N")){
+      for(var n = 0; n < num.length; n++){
+        if(holding.charAt(i) == num.charAt(n)){
+          bool3 = true;
+        }
+      }
+    }
+    else if((charType.charAt(3) == "S")){
+      for(var s = 0; s < symbols.length; s++){
+        if(holding.charAt(i) == symbols.charAt(s)){
+          bool4 = true;
+        }
+      }
+    }
+  }
+  if(bool1|| bool2 || bool3 || bool4){
+    return false;
+  }
+
+  return true;//defult return
 }
 
 // Add event listener to generate button
